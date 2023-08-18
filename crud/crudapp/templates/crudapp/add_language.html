@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container mt-5">
+  <h1>Add a New Language</h1>
+  <nav class="navbar bg-body-tertiary">
+    <form
+      class="container-fluid"
+      action="{% url 'crudapp:add_language' %}"
+      method="post"
+    >
+      {% csrf_token %}
+
+      <span>Language</span>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        placeholder="Language"
+      />
+      <button type="submit" class="btn btn-primary">ADD</button>
+    </form>
+  </nav>
+  {% for language in languages %}
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a href="{% url 'crudapp:del_language' language.pk %}"
+        >DELETE {{language.name}}</a
+      >
+    </li>
+  </ul>
+  {% endfor %}
+</div>
+{% endblock %}
